@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Talap — тренажёр ЕНТ: задания с разбором и пробное ЕНТ онлайн</title>
+  <meta name="description" content="Подготовка к ЕНТ по 15 минут в день: история Казахстана, математическая грамотность, грамотность чтения, математика и физика. Пробное ЕНТ в формате 2026 года, разбор каждого задания. От 2 990 ₸ в месяц.">
+  <meta property="og:title" content="Talap — тренажёр ЕНТ">
+  <meta property="og:description" content="Задания с разбором, пробное ЕНТ на 120 вопросов и работа над ошибками. Первые дни — бесплатно.">
+  <meta name="theme-color" content="#0b7c93">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230b7c93'/%3E%3Cpath d='M9 10h14M16 10v13' stroke='white' stroke-width='3.2' stroke-linecap='round'/%3E%3Ccircle cx='23' cy='22' r='2.6' fill='%23E8B31C'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-top"><div class="wrap">
+    <a class="logo" href="index.html" aria-label="Talap — на главную"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M9 10h14M16 10v13" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><circle cx="23" cy="22" r="2.6" fill="#E8B31C"/></svg><span>Talap</span></a>
+    <nav aria-label="Разделы">
+      <a class="link" href="#how">Как заниматься</a>
+      <a class="link" href="#prices">Цены</a>
+      <a class="link" href="#faq">Вопросы</a>
+      <a class="btn btn-ghost btn-sm" href="app.html?mode=login">Войти</a>
+      <a class="btn btn-pri btn-sm" href="app.html">Начать<span class="hide-sm"> бесплатно</span></a>
+    </nav>
+  </div></header>
+
+  <main>
+    <section class="hero"><div class="wrap hero-grid">
+      <div>
+        <h1>Готовься к ЕНТ по 15 минут в день</h1>
+        <p class="lead">История Казахстана, обе грамотности, математика и физика. Каждое задание с разбором, пробное ЕНТ в формате 2026 года и вопросы с ошибками, которые возвращаются, пока не решишь их верно.</p>
+        <div class="row">
+          <a class="btn btn-pri btn-lg" href="app.html">Начать бесплатно</a>
+          <a class="btn btn-lg" href="#prices">Цены</a>
+        </div>
+        <div class="hero-facts">
+          <div><b id="factQ">200</b>заданий с разбором</div>
+          <div><b>120</b>вопросов в пробном ЕНТ</div>
+          <div><b id="factP">2 990 ₸</b>в месяц, без автосписаний</div>
+        </div>
+      </div>
+
+      <div class="demo" id="demo">
+        <span class="demo-tag">Попробуйте задание</span>
+        <article class="q sheet">
+          <div class="q-meta"><span class="chip">Математическая грамотность</span></div>
+          <div class="q-body">В классе 30 учеников. 18 ходят на кружок математики, 12 — на кружок физики, а 6 учеников ходят на оба кружка. Сколько учеников не ходят ни на один кружок?</div>
+          <div class="opts" id="demoOpts"></div>
+          <div id="demoVerdict"></div>
+        </article>
+      </div>
+    </div></section>
+
+    <section class="section section-alt" id="ent"><div class="wrap">
+      <div class="section-head">
+        <h2>Из чего состоит ЕНТ</h2>
+        <p>Пять предметов, 120 заданий, 140 баллов, 4 часа. Ширина полосы — сколько баллов даёт предмет: профильные весят больше всего.</p>
+      </div>
+      <div class="entbar" id="entbar" aria-label="Распределение баллов ЕНТ по предметам">
+        <div class="s-history" style="flex:20"><b>20</b><span>История Казахстана</span></div>
+        <div class="s-mathlit" style="flex:10"><b>10</b><span>Мат. грамотность</span></div>
+        <div class="s-reading" style="flex:10"><b>10</b><span>Чтение</span></div>
+        <div class="s-math" style="flex:50"><b>50</b><span>Математика</span></div>
+        <div class="s-physics" style="flex:50"><b>50</b><span>Физика</span></div>
+      </div>
+      <div class="entbar-legend"><span>Порог: 50 баллов и минимум по каждому предмету</span><span>140</span></div>
+      <p class="muted small" style="margin-top:18px;max-width:46em">Сейчас в тренажёре профильная пара «Математика — Физика», её выбирают чаще всего. Задания с несколькими ответами оцениваются как на ЕНТ: 2 балла без ошибок, 1 балл при одной ошибке.</p>
+    </div></section>
+
+    <section class="section" id="how"><div class="wrap">
+      <div class="section-head"><h2>Как заниматься</h2><p>Короткие занятия каждый день дают больше, чем ночь перед экзаменом.</p></div>
+      <div class="grid-2">
+        <div class="feature panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v15H6a2 2 0 0 0-2 2z"/><path d="M4 20a2 2 0 0 0 2 2h13v-4"/><path d="M9 8h6M9 12h4"/></svg>
+          <h3>Тренажёр по темам</h3>
+          <p>10 заданий за раз. Сразу видно, верно или нет, и почему. Сначала даём новые вопросы, потом те, где была ошибка.</p>
+        </div>
+        <div class="feature panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M10 2h4"/></svg>
+          <h3>Пробное ЕНТ с таймером</h3>
+          <p>120 заданий и 4 часа, баллы по правилам ЕНТ. После теста — разбор каждого задания и баллы по предметам относительно порогов.</p>
+        </div>
+        <div class="feature panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6L4 8.7"/><path d="M4 4v4.7h4.7"/></svg>
+          <h3>Работа над ошибками</h3>
+          <p>Каждый вопрос с неверным ответом попадает в отдельный список и уходит из него, только когда вы ответите правильно.</p>
+        </div>
+        <div class="feature panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/><path d="m9 13 8-6"/></svg>
+          <h3>Напоминания в Telegram</h3>
+          <p>Бот напомнит вечером, если вы ещё не занимались, и покажет, сколько дней подряд вы готовитесь.</p>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="section section-alt" id="prices"><div class="wrap">
+      <div class="section-head"><h2>Цены</h2><p>Первые дни после регистрации открыт полный доступ. Потом можно заниматься бесплатно с ограничением или оформить подписку.</p></div>
+      <div class="grid-3">
+        <div class="price">
+          <h3 style="margin:0">Бесплатно</h3>
+          <div class="amount">0 ₸</div>
+          <ul><li><span id="freeDaily">20</span> заданий в день</li><li>Одно пробное ЕНТ</li><li>По одному тесту по каждому предмету</li><li>Разбор и работа над ошибками</li></ul>
+          <a class="btn btn-lg" href="app.html">Зарегистрироваться</a>
+        </div>
+        <div class="price">
+          <h3 style="margin:0">1 месяц</h3>
+          <div class="amount" id="pMonth">2 990 ₸</div>
+          <ul><li>Тренажёр без ограничений</li><li>Пробное ЕНТ сколько угодно раз</li><li>Тесты по предметам</li><li>Напоминания в Telegram</li></ul>
+          <a class="btn btn-pri btn-lg" href="app.html">Начать</a>
+        </div>
+        <div class="price best">
+          <h3 style="margin:0">3 месяца</h3>
+          <div class="amount" id="pQuarter">7 490 ₸</div>
+          <ul><li>Всё, что в месячной подписке</li><li id="pSave">2 497 ₸ в месяц</li><li>Хватит на подготовку к январскому или основному ЕНТ</li></ul>
+          <a class="btn btn-gold btn-lg" href="app.html">Начать</a>
+        </div>
+      </div>
+      <p class="small muted" style="margin-top:16px">Оплата переводом Kaspi. Доступ открывается после проверки перевода, обычно в течение нескольких часов.</p>
+    </div></section>
+
+    <section class="section" id="rules"><div class="wrap">
+      <div class="section-head"><h2>Честные правила</h2><p>Платформа работает по халяльным принципам: прозрачная цена и ничего лишнего.</p></div>
+      <div class="principles">
+        <div><h4>Без автосписаний</h4><p>Деньги не списываются сами. Доступ продлевается, только когда вы сами оплатите.</p></div>
+        <div><h4>Без процентов и переплат</h4><p>Фиксированная цена. Никаких кредитов, рассрочек с процентами и скрытых платежей.</p></div>
+        <div><h4>Без рекламы</h4><p>Ничего не отвлекает от учёбы. Не показываем рекламу и не продаём данные учеников.</p></div>
+        <div><h4>Без азартных механик</h4><p>Нет случайных призов, ставок и лутбоксов. Прогресс зависит только от ваших знаний.</p></div>
+        <div><h4>Без музыки</h4><p>Тихий интерфейс без звуков и фоновой музыки: удобно заниматься где угодно.</p></div>
+        <div><h4>Чистое содержание</h4><p>В задачах нет примеров с процентами по кредитам, алкоголем или азартными играми.</p></div>
+      </div>
+    </div></section>
+
+    <section class="section section-alt" id="faq"><div class="wrap" style="max-width:820px">
+      <h2>Вопросы</h2>
+      <details class="faq"><summary>Это официальный тест Национального центра тестирования?</summary>
+        <p>Нет. Talap — независимый тренажёр. Структура пробного ЕНТ, баллы и пороги взяты из открытых сообщений Министерства науки и высшего образования о формате 2026 года. Задания составлены нами и не повторяют настоящие варианты.</p></details>
+      <details class="faq"><summary>Как оплатить подписку?</summary>
+        <p>В кабинете откройте «Профиль» → «Подписка», выберите срок, переведите сумму через Kaspi по указанным реквизитам и нажмите «Я оплатил(а)». После проверки перевода доступ откроется автоматически.</p></details>
+      <details class="faq"><summary>Что будет, когда подписка закончится?</summary>
+        <p>Ничего не спишется. Вы вернётесь в бесплатный режим, а вся статистика и история тестов сохранятся. Продлить можно в любой момент.</p></details>
+      <details class="faq"><summary>Можно вернуть деньги?</summary>
+        <p>Да. Напишите в поддержку — вернём деньги за неиспользованные дни подписки.</p></details>
+      <details class="faq"><summary>На каком языке задания?</summary>
+        <p>Сейчас на русском. Версию на казахском языке готовим следующей.</p></details>
+      <details class="faq"><summary>Нашёл ошибку в задании. Куда писать?</summary>
+        <p>После ответа нажмите «Ошибка в вопросе?» и опишите, что не так. Мы проверяем каждое сообщение и исправляем вопрос.</p></details>
+    </div></section>
+
+    <section class="section"><div class="wrap center stack">
+      <h2>До ЕНТ меньше времени, чем кажется</h2>
+      <p class="lead" style="margin-inline:auto;max-width:30em">Зарегистрируйтесь и решите первые 10 заданий прямо сейчас — это займёт 15 минут.</p>
+      <div><a class="btn btn-pri btn-lg" href="app.html">Начать бесплатно</a></div>
+    </div></section>
+  </main>
+
+  <footer class="site-foot"><div class="wrap">
+    <span>© <span id="year">2026</span> Talap</span>
+    <span class="row"><a href="terms.html">Оферта и конфиденциальность</a><span id="support"></span></span>
+  </div></footer>
+
+  <script src="vendor/supabase.js"></script>
+  <script type="module">
+    import { sb, money, esc, supportLink } from './js/lib.js';
+
+    // Демо-задание: проверка прямо на странице
+    const demo = { options: ['0', '12', '6', '24'], correct: 2,
+      explanation: 'Хотя бы на один кружок ходят 18 + 12 − 6 = 24 ученика: тех, кто ходит на оба, иначе посчитали бы дважды. Не ходят 30 − 24 = 6.' };
+    const L = ['A', 'B', 'C', 'D'];
+    const box = document.getElementById('demoOpts');
+    const verdict = document.getElementById('demoVerdict');
+    box.innerHTML = demo.options.map((o, i) => `<button type="button" class="opt" data-i="${i}"><span class="l">${L[i]}</span><span>${o}</span></button>`).join('');
+    box.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', () => {
+      const i = Number(b.dataset.i);
+      box.querySelectorAll('.opt').forEach((x, j) => {
+        x.disabled = true;
+        if (j === demo.correct) x.classList.add('right');
+        else if (j === i) x.classList.add('wrong');
+      });
+      const ok = i === demo.correct;
+      verdict.innerHTML = `<div class="verdict ${ok ? 'ok' : 'bad'}" role="status"><h4>${ok ? 'Верно' : 'Неверно — правильный ответ: C'}</h4><p>${demo.explanation}</p>
+        <a class="btn btn-pri" href="app.html">Решить ещё 10 заданий</a></div>`;
+    }));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Актуальные цены и размер банка вопросов
+    try {
+      const [{ data: s }, { data: cat }] = await Promise.all([
+        sb.from('platform_settings').select('price_month, price_quarter, free_daily, support_contact').eq('id', 1).maybeSingle(),
+        sb.rpc('get_catalog'),
+      ]);
+      if (s) {
+        document.getElementById('pMonth').textContent = money(s.price_month);
+        document.getElementById('pQuarter').textContent = money(s.price_quarter);
+        document.getElementById('factP').textContent = money(s.price_month);
+        document.getElementById('freeDaily').textContent = s.free_daily;
+        const per = Math.round(s.price_quarter / 3);
+        const save = s.price_month * 3 - s.price_quarter;
+        document.getElementById('pSave').textContent = `${money(per)} в месяц` + (save > 0 ? `, выгода ${money(save)}` : '');
+        if (s.support_contact) {
+          const link = supportLink(s.support_contact);
+          document.getElementById('support').innerHTML = link ? `<a href="${esc(link)}" target="_blank" rel="noopener">Поддержка: ${esc(s.support_contact)}</a>` : esc(s.support_contact);
+        }
+      }
+      if (Array.isArray(cat)) {
+        const total = cat.reduce((a, x) => a + x.questions, 0);
+        if (total) document.getElementById('factQ').textContent = total;
+      }
+    } catch { /* без сети показываем значения по умолчанию */ }
+  </script>
+</body>
+</html>
