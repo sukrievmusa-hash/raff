@@ -1,4 +1,4 @@
-// Talap — кабинет ученика: тренажёр, пробное ЕНТ, работа над ошибками, подписка
+// Talap — кабинет ученика: тренажёр, пробное ЕНТ, работа над ошибками, бесплатно
 import {
   sb, $, $$, esc, rich, money, LETTERS, pl, plural, fmtDate, fmtDateFull, fmtDateTime, daysLeft,
   toast, toastErr, errText, rpc, settings, modal, confirmBox, copyText, logoHtml, supportLink, BRAND,
@@ -71,9 +71,7 @@ function updateShell() {
   const tr = $('#topRight');
   if (!tr || !me) return;
   const streak = me.streak > 0 ? `<span class="chip chip-gold" title="Дней подряд с занятиями">🔥 ${me.streak}</span>` : '';
-  const access = me.premium
-    ? (me.plan === 'trial' ? `<a class="chip chip-sky" href="#/pay">Пробный: ${pl(Math.max(daysLeft(me.paid_until), 0), 'день', 'дня', 'дней')}</a>` : '')
-    : `<a class="btn btn-gold btn-sm" href="#/pay">Подписка</a>`;
+  const access = `<a class="chip chip-gold" href="#/pay">♥ Поддержать</a>`;
   tr.innerHTML = streak + access;
 }
 
@@ -133,14 +131,7 @@ async function viewHome(v) {
   const subjects = S.catalog || [];
   const weakest = [...subjects].sort((a, b) => (a.done ? a.ok / a.done : -1) - (b.done ? b.ok / b.done : -1))[0];
 
-  let access = '';
-  if (!me.premium) {
-    access = `<div class="note note-gold row-between"><div><b>Бесплатный режим.</b> ${me.free_left > 0 ? `Сегодня осталось ${pl(me.free_left, 'задание', 'задания', 'заданий')}.` : 'Задания на сегодня закончились.'} С подпиской — без ограничений и с пробными ЕНТ.</div><a class="btn btn-gold btn-sm" href="#/pay">Оформить</a></div>`;
-  } else if (me.plan === 'trial') {
-    access = `<div class="note row-between"><div><b>Пробный доступ до ${fmtDate(me.paid_until)}.</b> Всё открыто: тренажёр без ограничений, пробное ЕНТ, разбор ошибок.</div><a class="btn btn-sm" href="#/pay">Тарифы</a></div>`;
-  } else if (daysLeft(me.paid_until) <= 5) {
-    access = `<div class="note note-gold row-between"><div>Подписка закончится ${fmtDate(me.paid_until)}.</div><a class="btn btn-gold btn-sm" href="#/pay">Продлить</a></div>`;
-  }
+  const access = '';
 
   const lm = st.last_mock;
   v.innerHTML = `
@@ -661,12 +652,9 @@ async function viewProfile(v) {
     <div class="grid-2" style="align-items:start">
       <div class="stack-lg">
         <div class="panel stack">
-          <h3>Подписка</h3>
-          ${me.premium
-            ? `<p style="margin:0">${me.plan === 'trial' ? 'Пробный доступ' : 'Полный доступ'} до <b>${fmtDateFull(me.paid_until)}</b>.</p>`
-            : `<p style="margin:0">Бесплатный режим: ${pl(me.free_daily, 'задание', 'задания', 'заданий')} в день и по одному пробному тесту.</p>`}
-          ${me.pending_payment ? '<div class="note small">Заявка на оплату на проверке. Обычно проверяем в течение нескольких часов.</div>' : ''}
-          <a class="btn ${me.premium ? '' : 'btn-gold'}" href="#/pay">${me.premium && me.plan !== 'trial' ? 'Продлить подписку' : 'Оформить подписку'}</a>
+          <h3>Поддержать автора</h3>
+          <p class="small muted" style="margin:0">Talap бесплатный. Если он вам помог, можно поддержать автора любой суммой — по желанию.</p>
+          <a class="btn btn-gold" href="#/pay">Поддержать</a>
         </div>
         <div class="panel stack">
           <h3>Напоминания в Telegram</h3>
@@ -744,65 +732,24 @@ async function viewProfile(v) {
 async function viewPay(v) {
   loading(v);
   S.settings = await settings();
-  await refreshMe();
-  const { data: history } = await sb.from('payment_requests').select('*').order('created_at', { ascending: false }).limit(20);
-  const s = S.settings, me = S.me;
-  const pending = (history || []).find((p) => p.status === 'pending');
-  const perMonthQ = Math.round(s.price_quarter / 3);
-  let plan = 'quarter';
-  const ST = { pending: ['На проверке', 'chip-sky'], approved: ['Оплачено', 'chip-ok'], rejected: ['Не найдено', 'chip-bad'] };
-
+  const s = S.settings;
   v.innerHTML = `<p><a href="#/profile">Профиль</a></p>
-    <div class="page-title"><h1>Подписка</h1>${me.premium ? `<span class="muted">Доступ до ${fmtDateFull(me.paid_until)}</span>` : ''}</div>
-    ${pending ? `<div class="note" style="margin-bottom:20px"><b>Заявка на ${money(pending.amount)} на проверке.</b> Как только найдём перевод в Kaspi, доступ откроется автоматически${me.tg_connected ? ' и бот пришлёт сообщение' : ''}.</div>` : ''}
+    <div class="page-title"><h1>Поддержать автора</h1></div>
     <div class="grid-2" style="align-items:start">
-      <div class="stack">
-        <div class="grid-2" id="plans">
-          <button type="button" class="price" data-plan="month" style="text-align:left;cursor:pointer;font:inherit;color:inherit">
-            <h3 style="margin:0">1 месяц</h3><div class="amount">${money(s.price_month)}</div><span class="small muted">Попробовать подписку</span></button>
-          <button type="button" class="price" data-plan="quarter" style="text-align:left;cursor:pointer;font:inherit;color:inherit">
-            <h3 style="margin:0">3 месяца</h3><div class="amount">${money(s.price_quarter)}</div><span class="small muted">${money(perMonthQ)} в месяц${s.price_month * 3 > s.price_quarter ? `, выгода ${money(s.price_month * 3 - s.price_quarter)}` : ''}</span></button>
-        </div>
-        <div class="panel"><h3>Что входит</h3><ul class="small muted" style="margin:0;padding-left:20px">
-          <li>Тренажёр без ограничений по всем предметам</li><li>Пробное ЕНТ и тесты по предметам — сколько угодно раз</li>
-          <li>Разбор каждого задания и работа над ошибками</li><li>Напоминания в Telegram</li></ul></div>
-        <p class="small muted">Цена фиксированная, без процентов и скрытых платежей. Автосписаний нет: доступ продлевается, только когда вы сами оплатите.</p>
+      <div class="panel stack">
+        <h3>Talap бесплатный</h3>
+        <p class="small" style="margin:0">Все задания, пробные ЕНТ и разбор ошибок открыты без оплаты и без ограничений. Платформу делает один человек: если она вам помогла, вы можете поддержать автора — на хостинг, новые задания и казахскую версию.</p>
+        <p class="small muted" style="margin:0">Сумма любая, на ваше усмотрение, и это не обязательно. Ничего не откроется и не закроется от того, поддержали вы или нет. Это добровольный подарок, а не плата за услугу.</p>
       </div>
-      <form class="panel stack" id="payf">
-        <h3>Оплата переводом Kaspi</h3>
-        <p class="small" style="margin:0">1. Переведите <b id="sum"></b> в приложении Kaspi.kz по реквизитам:</p>
-        ${s.kaspi_details ? `<div class="code" style="font-size:15px">${esc(s.kaspi_details)}</div><button class="btn btn-sm" type="button" id="copyk" style="align-self:flex-start">Скопировать реквизиты</button>`
-                          : '<div class="note note-bad small">Реквизиты ещё не указаны. Напишите в поддержку.</div>'}
-        <p class="small" style="margin:0">2. Укажите имя отправителя, как оно видно в Kaspi (например, «Айгерим С.»), — так мы найдём ваш перевод.</p>
-        <label class="field"><span>Имя отправителя</span><input class="input" name="note" maxlength="200" required></label>
-        <p class="small" style="margin:0">3. Нажмите кнопку ниже. Доступ откроется после проверки перевода.</p>
-        <button class="btn btn-gold btn-lg btn-block" type="submit" ${pending || !s.kaspi_details ? 'disabled' : ''}>Я оплатил(а)</button>
-        ${s.support_contact ? `<p class="small muted center" style="margin:0">Вопросы по оплате: <a target="_blank" rel="noopener" href="${esc(supportLink(s.support_contact, 'Здравствуйте! Вопрос по оплате Talap'))}">${esc(s.support_contact)}</a></p>` : ''}
-      </form>
-    </div>
-    ${(history || []).length ? `<h3 style="margin-top:28px">История оплат</h3><div class="list">${history.map((p) => `<div class="topic" style="cursor:default">
-      <span><b>${money(p.amount)}</b> <span class="small muted">за ${p.months === 1 ? '1 месяц' : '3 месяца'}, ${fmtDateTime(p.created_at)}</span></span>
-      <span class="chip ${ST[p.status][1]}">${ST[p.status][0]}</span></div>`).join('')}</div>` : ''}`;
-
-  const syncPlan = () => {
-    $$('[data-plan]', v).forEach((b) => { b.classList.toggle('best', b.dataset.plan === plan); b.setAttribute('aria-pressed', b.dataset.plan === plan); });
-    $('#sum', v).textContent = money(plan === 'month' ? s.price_month : s.price_quarter);
-  };
-  $$('[data-plan]', v).forEach((b) => (b.onclick = () => { plan = b.dataset.plan; syncPlan(); }));
-  syncPlan();
+      <div class="panel stack">
+        <h3>Перевод через Kaspi</h3>
+        ${s.kaspi_details ? `<div class="code" style="font-size:15px">${esc(s.kaspi_details)}</div><button class="btn btn-gold" type="button" id="copyk" style="align-self:flex-start">Скопировать реквизиты</button>`
+                          : '<div class="note small">Реквизиты ещё не указаны.</div>'}
+        <p class="small muted" style="margin:0">Откройте Kaspi.kz → Платежи → Перевод по номеру телефона и укажите любую сумму. Спасибо и да воздаст вам Аллах благом!</p>
+        ${s.support_contact ? `<p class="small muted" style="margin:0">Вопросы и ошибки в заданиях: <a target="_blank" rel="noopener" href="${esc(supportLink(s.support_contact, 'Здравствуйте! Вопрос по Talap'))}">${esc(s.support_contact)}</a></p>` : ''}
+      </div>
+    </div>`;
   $('#copyk', v) && ($('#copyk', v).onclick = () => copyText(s.kaspi_details));
-  $('#payf', v).onsubmit = async (e) => {
-    e.preventDefault();
-    const note = e.target.note.value.trim();
-    if (note.length < 2) return toastErr('Укажите имя отправителя перевода');
-    const btn = $('button[type=submit]', e.target);
-    btn.disabled = true;
-    try {
-      await rpc('request_payment', { p_plan: plan, p_note: note });
-      toast('Заявка отправлена. Проверим перевод и откроем доступ');
-      viewPay(v);
-    } catch (err) { btn.disabled = false; toastErr(err); }
-  };
 }
 
 sb.auth.onAuthStateChange((ev) => { if (ev === 'SIGNED_OUT') location.href = 'index.html'; });
