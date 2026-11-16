@@ -14,7 +14,7 @@ export function renderAuth(root, { mode = 'signup', onDone, allowSignup = true, 
         <label class="field su"><span>Класс</span><select class="input" name="grade">
           <option value="11">11 класс</option><option value="10">10 класс</option><option value="9">9 класс</option><option value="grad">Уже окончил(а) школу</option></select></label>
         <label class="field su"><span>Телефон (необязательно — для восстановления пароля)</span><input class="input" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 7__ ___ __ __"></label>
-        <label class="check small su"><input type="checkbox" name="agree" checked><span>Принимаю <a href="terms.html" target="_blank">условия</a> и <a href="terms.html#privacy" target="_blank">политику конфиденциальности</a></span></label>
+        <label class="check small su"><input type="checkbox" name="agree" checked><span>Принимаю <a href="terms.html" target="_blank" rel="noopener">условия</a> и <a href="terms.html#privacy" target="_blank" rel="noopener">политику конфиденциальности</a></span></label>
         <button class="btn btn-pri btn-block btn-lg" type="submit" id="ab"></button>
         <button class="btn btn-ghost btn-block" type="button" id="alt"></button>
       </form>
